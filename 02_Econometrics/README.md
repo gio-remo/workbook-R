@@ -1,0 +1,1 @@
+Notes and exercises from the Econometrics course of my master's degree programme.
