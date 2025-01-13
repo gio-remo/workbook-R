@@ -92,6 +92,7 @@ rbind_stocks
 
 plot(cbind_stocks)
 ```
+
 Use function **cor()** to calculate correlation between variables
 
 ```{r}

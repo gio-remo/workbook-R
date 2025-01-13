@@ -125,6 +125,7 @@ plot(cbind_stocks)
 ```
 
 ![](02-Vectors-and-Matrices_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
 Use function **cor()** to calculate correlation between variables
 
 ``` r

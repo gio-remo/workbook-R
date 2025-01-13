@@ -1,6 +1,6 @@
 ---
 title: "Introduction to R for Finance"
-output: html_document
+output: github_document
 ---
 
 ### Module 03 - DataFrames
