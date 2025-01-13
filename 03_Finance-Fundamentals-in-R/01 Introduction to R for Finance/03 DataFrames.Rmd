@@ -1,0 +1,94 @@
+---
+title: "Introduction to R for Finance"
+output: html_document
+---
+
+### Module 03 - DataFrames
+
+DataFrames can store different types of data.
+
+Use constructor **data.frame()** to create one.
+
+```{r}
+# Variables
+company <- c("A", "A", "A", "B", "B", "B", "B")
+cash_flow <- c(1000, 4000, 550, 1500, 1100, 750, 6000)
+year <- c(1, 3, 4, 1, 2, 4, 5)
+
+# DataFrame
+cash <- data.frame(company, cash_flow, year)
+cash
+```
+```{r}
+head(cash, n=4)
+
+tail(cash, n=3)
+
+# Structure of the DataFrame
+str(cash)
+```
+
+Use **colnames()** and **rownames()** to rename col/row functions.
+
+```{r}
+colnames(cash)
+
+colnames(cash) <- c("company", "cashflow", "year")
+colnames(cash)
+
+rownames(cash)
+```
+To subset a DataFrame use brackets: **dataframe[row, col]**
+
+```{r}
+cash[3,2]
+cash[,"company"]
+```
+To acccess a column in a df, you can also use: **dataframe$col**
+
+```{r}
+cash$year
+
+cash$cashflow * 2
+
+# Delete a column
+cash$company <- NULL
+cash
+```
+To filter a df with conditions, use function **subset()**
+
+```{r}
+subset(cash, company == "B")
+
+subset(cash, year == 1)
+```
+
+To append a new column, **dataframe$new_col**
+
+```{r}
+cash$double_year <- cash$year * 2
+```
+
+To append a new row, use **rbind()**
+
+```{r}
+df1 <- c(10, 1000)
+names(df1) <- c("eta", "valore")
+
+df2 <- c(15, 800)
+names(df2) <- c("eta", "valore")
+
+df <- rbind(df1, df2)
+df
+```
+Exercise: calculate the present value of projected cash flows.
+
+```{r}
+# Present value of $4000, in 3 years, at 5%
+present_value_4k <- 4000 * (1.05)^-3
+
+# Present value of all cash flows at 5%
+cash$present_value <- cash$cashflow * (1.05)^-cash$year
+cash
+```
+

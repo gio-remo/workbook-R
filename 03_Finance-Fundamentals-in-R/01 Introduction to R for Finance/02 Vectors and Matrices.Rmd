@@ -1,0 +1,107 @@
+---
+title: "Introduction to R for Finance"
+output: html_document
+---
+
+### Module 02 - Vectors and Matrices
+
+**c()**ombine to create crate vectors
+
+Note: a vector can only be composed of one data type!
+
+```{r}
+# Numeric
+ibm_stock <- c(159.82, 160.02, 159.84)
+
+# Strings
+finance <- c("stocks", "bonds", "investments")
+
+# Logical
+logic <- c(TRUE, FALSE, TRUE)
+```
+
+Use functions **plot()** or **hist()** to visualize datasets.
+
+```{r}
+data("mtcars") # Built in dataset
+v <- mtcars$mpg
+hist(v, xlab="MPG", ylab="Frequency", main="Distribution")
+
+```
+
+Use function **sum()** to sum over the entire vector.
+
+```{r, collapse=TRUE}
+ret <- c(7, 9) # Return
+weight <- c(.2, .8) # Weight
+companies <- c("Microsoft", "Sony") # Company Name
+
+# Assign company names to your vectors
+names(ret) <- companies
+names(weight) <- companies
+
+# Multiply the returns and weights together 
+ret_X_weight <- ret * weight
+
+# Print ret_X_weight
+ret_X_weight
+
+# Sum to get the total portfolio return
+portf_ret <- sum(ret_X_weight)
+
+cat("Total Portfolio Return:", portf_ret)
+```
+You can subset a vector using brakets: [ ]
+
+```{r, collapse=TRUE}
+print("First five items:")
+v[1:5]
+
+print("All except first:")
+v[-1]
+
+# Last item of a vecotr
+print("Last item:")
+cat(v[length(v)], tail(v, n=1))
+```
+Create a Matrix using function **matrix()**
+
+```{r}
+# Vector
+my_vector <- c(1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+# 3x3 matrix
+my_matrix <- matrix(data = my_vector, nrow = 3, ncol = 3)
+
+my_matrix
+
+# Filling across using byrow = TRUE
+matrix(data = c(2, 3, 4, 5), nrow = 2, ncol = 2, byrow = TRUE)
+```
+Merge vectors to create a matrix using **cbind()** or **rbind()**
+
+```{r, collapse=TRUE}
+apple <- c(100, 101, 102)
+ibm <- c(55, 45, 47)
+
+cbind_stocks <- cbind(apple, ibm)
+cbind_stocks
+
+rbind_stocks <- rbind(apple, ibm)
+rbind_stocks
+
+plot(cbind_stocks)
+```
+Use function **cor()** to calculate correlation between variables
+
+```{r}
+cor(cbind_stocks)
+```
+To subset a matrix: **my_matrix[row, col]**
+
+```{r, collapse=TRUE}
+cbind_stocks[1,] # First row
+cbind_stocks[,"apple"] # apple column
+cbind_stocks[1,1]
+```
+
