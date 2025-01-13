@@ -1,6 +1,6 @@
 ---
 title: "Introduction to R for Finance"
-output: html_document
+output: html_notebook
 ---
 
 ### Module 02 - Vectors and Matrices
