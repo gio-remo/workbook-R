@@ -1,0 +1,106 @@
+---
+title: "Intermediate R for Finance"
+output: github_document
+---
+
+### Module 01 - Dates
+
+The two main classes of data for this are Date and POSIXct:
+
+- Date is used for calendar date objects like "2015-01-22"
+
+- POSIXct is a way to represent datetime objects like "2015-01-22 08:39:40 EST"
+
+```{r}
+# Current date
+Sys.Date()
+
+# Current date+time
+Sys.time()
+
+today <- Sys.Date()
+class(today)
+```
+
+To convert string (yyyy-mm-dd) to Date use as.Date():
+
+```{r}
+# Date
+crash <- as.Date("2008-09-29")
+crash
+
+# String as Numeric (= days since January, 1 1970)
+as.numeric(crash)
+
+as.numeric(Sys.time())
+```
+
+To convert multiple dates from character to date format, you can do this all at once using *vectors*.
+
+```{r}
+# Vector
+dates <- c("2017-02-05", "2017-02-06", "2017-02-07", "2017-02-08")
+
+# Names
+names(dates) <- c("Sunday", "Monday", "Tuesday", "Wednesday")
+dates
+
+# Subset "Monday"
+dates[2]
+```
+
+Specify Date format with its parameter:
+
+```{r collapse=TRUE}
+as.Date("Ago 30, 1930", format = "%b %d, %Y")
+
+as.Date("12.05.00", format="%d.%m.%y")
+
+# Vector
+char_dates <- c("1gen17", "2gen17", "3gen17", "4gen17", "5gen7")
+
+# Create dates using as.Date() and the correct format 
+dates <- as.Date(char_dates, format = "%e%b%y")
+
+# Use format() to go from "2017-01-04" -> "Jan 04, 17"
+format(dates, format = "%b %d, %y")
+
+# Use format() to go from "2017-01-04" -> "01,04,2017"
+format(dates, format = "%m,%d,%Y")
+```
+
+Date difference:
+
+```{r, collapse=TRUE}
+today <- Sys.Date()
+today
+
+tomor <- Sys.Date() + 1
+tomor
+
+# Difference
+tomor - today
+
+# Difference format
+difftime(tomor, today, units = "hours")
+```
+
+A few functions useful for extracting date components: **months() weekdays() quarters()**
+
+```{r collapse=TRUE}
+dates <- as.Date(c("2017-01-02", "2017-05-03", "2017-08-04", "2017-10-17"))
+
+# Months
+months(dates)
+
+# Quarters
+quarters(dates)
+
+dates2 <- as.Date(c("2017-01-02", "2017-01-03", "2017-01-04", "2017-01-05"))
+
+# Assign the weekdays() of dates2 as the names()
+names(dates2) <- weekdays(dates2)
+
+# Print dates2
+dates2
+```

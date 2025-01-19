@@ -1,0 +1,122 @@
+---
+title: "Intermediate R for Finance"
+output: github_document
+---
+
+### Module 03 - Loops
+
+#### repeat
+
+You must specify when you want to **break** out of the loop.
+
+```{r}
+# Stock price
+stock_price <- 126.34
+
+repeat {
+  # New stock price
+  stock_price <- stock_price * runif(1, .985, 1)
+  print(stock_price)
+  
+  # Check
+  if(stock_price < 125) {
+    print("Stock price is below 125! Buy it while it's cheap!")
+    break
+  }
+}
+```
+
+#### while
+
+```{r}
+# Initial debt
+debt <- 5000
+
+# While loop to pay off your debt
+while (debt > 0) {
+  debt <- debt - 500
+  print(paste("Debt remaining", debt))
+}
+```
+
+while with break:
+
+```{r}
+# debt and cash
+debt <- 5000
+cash <- 4000
+
+# Pay off your debt...if you can!
+while (debt > 0) {
+  debt <- debt - 500
+  cash <- cash - 500
+  print(paste("Debt remaining:", debt, "and Cash remaining:", cash))
+
+  if (cash == 0) {
+    print("You ran out of cash!")
+    break
+  }
+}
+```
+
+#### for loop
+
+```{r}
+# Sequence
+seq <- c(1:10)
+
+# Print loop
+for (value in seq) {
+    print(value)
+}
+
+# A sum variable
+sum <- 0
+
+# Sum loop
+for (value in seq) {
+    sum <- sum + value
+    print(sum)
+}
+```
+
+Looping over data frame rows:
+
+```{r, eval=FALSE}
+# Loop over stock rows
+for (row in 1:nrow(stock)) {
+    price <- stock[row, "apple"]
+    date  <- stock[row, "date"]
+
+    if(price > 116) {
+        print(paste("On", date, 
+                    "the stock price was", price))
+    } else {
+        print(paste("The date:", date, 
+                    "is not an important day!"))
+    }
+}
+```
+
+**break** and **next** in for loop:
+
+```{r, eval=FALSE}
+# Print apple
+apple
+
+# Loop through apple. Next if NA. Break if above 117.
+for (value in apple) {
+    if(is.na(value)) {
+        print("Skipping NA")
+        next
+    }
+    
+    if(value > 117) {
+        print("Time to sell!")
+        break
+    } else {
+        print("Nothing to do here!")
+    }
+}
+```
+
